@@ -1,11 +1,10 @@
-const express = require('express');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-})
-
+require("./routes/diolog-flow-routes")(app);
 
 const PORT = process.env.PORT || 5000;
 
