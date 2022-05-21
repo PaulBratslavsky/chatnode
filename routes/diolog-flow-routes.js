@@ -1,4 +1,6 @@
 const controllers = require("../controllers/chatbot");
+const { logChat } = require("../services/logChat")
+
 
 module.exports = (app) => {
   app.get("/", (req, res) => {
@@ -7,6 +9,8 @@ module.exports = (app) => {
 
   app.post("/api/v1/df_text_query", async (req, res) => {
     const response = await controllers.textQuery(req.body.text, req.body.parameters);
+    const logResponse = await logChat(req.body.text, response);
+    console.log(logResponse, "log response")
     res.send(response);
   });
 
